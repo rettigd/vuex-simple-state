@@ -5,7 +5,7 @@
   "description": "Vue plugin that makes setting and getting state simple",
   "main": "./dist/index.js",
   "scripts": {
-    "build": "bili --name index --plugin vue --vue.css false"
+    "build": "bili --bundle-node-modules"
   },
   "files": [
     "dist/*"

@@ -1,5 +1,6 @@
 # Vuex Simple State
 
+
 ## Add the project to your main.js
 ```
 import store from './store'
