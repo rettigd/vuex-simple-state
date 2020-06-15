@@ -22,12 +22,7 @@ const vuexState = {
           target = `${target}.${Object.keys(binding.modifiers).join(".")}`
         }
 
-        if (el.nodeName === 'INPUT' || el.nodeName === 'TEXTAREA') {
-          el.addEventListener('keyup', commitState)
-        }
-        if (el.nodeName === 'SELECT') {
-          el.addEventListener('change', commitState)
-        }
+        el.addEventListener('input', commitState)
 
         el.value = get(vnode.context.$store.state, target)
         el.dataset.vuex = target
