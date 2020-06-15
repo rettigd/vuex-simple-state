@@ -1,46 +1,36 @@
 {
-  "name": "directive",
-  "version": "0.1.0",
-  "private": true,
+  "private": false,
+  "name": "vuex-state",
+  "version": "0.0.1",
+  "description": "Vue plugin that makes setting and getting state simple",
+  "main": "./dist/index.js",
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "build": "bili --name index --plugin vue --vue.css false"
   },
-  "dependencies": {
-    "core-js": "^3.6.5",
+  "files": [
+    "dist/*"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rettigd/vuex-simple-state.git"
+  },
+  "keywords": [
+    "vue",
+    "vuex",
+    "plugin",
+    "state"
+  ],
+  "author": "Darryl Rettig",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rettigd/vuex-simple-state/issues"
+  },
+  "homepage": "https://github.com/rettigd/vuex-simple-state#readme",
+  "devDependencies": {
+    "@vue/compiler-sfc": "^3.0.0-beta.15",
+    "bili": "^5.0.2",
     "lodash.get": "^4.4.2",
     "lodash.set": "^4.3.2",
-    "vue": "^2.6.11",
-    "vuex": "^3.4.0"
-  },
-  "devDependencies": {
-    "@vue/cli-plugin-babel": "~4.4.0",
-    "@vue/cli-plugin-eslint": "~4.4.0",
-    "@vue/cli-plugin-vuex": "~4.4.0",
-    "@vue/cli-service": "~4.4.0",
-    "babel-eslint": "^10.1.0",
-    "eslint": "^6.7.2",
-    "eslint-plugin-vue": "^6.2.2",
-    "vue-template-compiler": "^2.6.11"
-  },
-  "eslintConfig": {
-    "root": true,
-    "env": {
-      "node": true
-    },
-    "extends": [
-      "plugin:vue/essential",
-      "eslint:recommended"
-    ],
-    "parserOptions": {
-      "parser": "babel-eslint"
-    },
-    "rules": {}
-  },
-  "browserslist": [
-    "> 1%",
-    "last 2 versions",
-    "not dead"
-  ]
+    "rollup-plugin-vue": "^6.0.0-beta.6"
+  }
 }

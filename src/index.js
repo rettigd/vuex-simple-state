@@ -1,21 +1,21 @@
 import get from 'lodash.get'
 import set from 'lodash.set'
 
-const YVuex = {
+const vuexState = {
   install(Vue) {
     Vue.mixin({
       methods: {
-        yCommit(event) {
-          this.$store.commit('yVuexSet', {
+        commitState(event) {
+          this.$store.commit('mutateState', {
             attribute: event.target.dataset['vuex'],
             value: event.target.value
           })
         }
       }
     }),
-    Vue.directive('yvuex', {
+    Vue.directive('state', {
       bind: function(el, binding, vnode) {
-        let yCommit = binding.value;
+        let commitState = binding.value;
         let target = binding.arg
             
         if (Object.keys(binding.modifiers).length !== 0) {
@@ -23,10 +23,10 @@ const YVuex = {
         }
 
         if (el.nodeName === 'INPUT' || el.nodeName === 'TEXTAREA') {
-          el.addEventListener('keyup', yCommit)
+          el.addEventListener('keyup', commitState)
         }
         if (el.nodeName === 'SELECT') {
-          el.addEventListener('change', yCommit)
+          el.addEventListener('change', commitState)
         }
 
         el.value = get(vnode.context.$store.state, target)
@@ -43,12 +43,12 @@ const YVuex = {
   }
 }
 
-export const yVuexSet = function (state, value) {
+export const mutateState = function (state, value) {
   set(state, value.attribute, value.value);
 }
 
-export default YVuex
+export default vuexState
 
 if (typeof window !== 'undefined' && window.Vue) {
-  window.Vue.use(YVuex)
+  window.Vue.use(vuexState)
 }

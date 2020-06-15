@@ -1,24 +1,47 @@
-# directive
+# Vuex Simple State
 
-## Project setup
+## Add the project to your main.js
 ```
-yarn install
-```
+import store from './store'
+....
+import State from 'vuex-state'
 
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
+Vue.use(State)
 
-### Compiles and minifies for production
-```
-yarn build
 ```
 
-### Lints and fixes files
+### Add the mutation to your store
 ```
-yarn lint
+import { mutateState } from 'vuex-state'
+...
+  state: {
+    email: 'me@example.com',
+    user: {
+      email: ''
+    }
+  }
+  mutations: {
+    mutateState //Add the mutation here
+  },
+
+...
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+### Add the directive to your code
+<input v-state:[your state element]="commitState">
+```
+<input v-state:email="commitState">
+```
+
+Thats it!
+
+### For modules or nested elements
+<input v-state:[your state element][child element]="commitState">  
+or  
+<input v-state:[module][your state element]="commitState">  
+or  
+<input v-state:[module][your state element][child element]="commitState">  
+
+```
+<input v-state:user.email="commitState">
+```
