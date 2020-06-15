@@ -1,7 +1,7 @@
 {
   "private": false,
   "name": "vuex-simple-state",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Vue plugin that makes setting and getting state simple",
   "main": "./dist/index.js",
   "scripts": {
