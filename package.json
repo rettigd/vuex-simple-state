@@ -1,11 +1,11 @@
 {
   "private": false,
   "name": "vuex-simple-state",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Vue plugin that makes setting and getting state simple",
   "main": "./dist/index.js",
   "scripts": {
-    "build": "bili --bundle-node-modules"
+    "build": "bili --bundle-node-modules --format cjs --format esm --format esm-min --format cjs-min"
   },
   "files": [
     "dist/*"
