@@ -1933,11 +1933,7 @@ function set(object, path, value) {
 var lodash_set = set;
 
 function setup(store, el, binding) {
-  var event = 'input';
-
-  if (Object.keys(binding.modifiers).length) {
-    event = Object.keys(binding.modifiers)[0];
-  }
+  var event = getEvent(binding);
 
   var commitState = function commitState(event) {
     store.commit('mutateState', {
@@ -1956,12 +1952,18 @@ function _update(store, el, binding) {
   el.dataset.vuex = binding.value;
 }
 
-function destroy(store, el, binding) {
+function getEvent(binding) {
   var event = 'input';
 
   if (Object.keys(binding.modifiers).length) {
     event = Object.keys(binding.modifiers)[0];
   }
+
+  return event;
+}
+
+function destroy(store, el, binding) {
+  var event = getEvent(binding);
 
   var commitState = function commitState(event) {
     store.commit('mutateState', {

@@ -2,11 +2,7 @@ import get from 'lodash.get'
 import set from 'lodash.set'
 
 function setup (store, el, binding) {
-  let event = 'input'
-
-  if (Object.keys(binding.modifiers).length) {
-    event = Object.keys(binding.modifiers)[0]
-  }
+  const event = getEvent(binding)
 
   const commitState = (event) => {
     store.commit('mutateState', {
@@ -25,12 +21,18 @@ function update (store, el, binding) {
   el.dataset.vuex = binding.value
 }
 
-function destroy (store, el, binding) {
+function getEvent (binding) {
   let event = 'input'
 
   if (Object.keys(binding.modifiers).length) {
     event = Object.keys(binding.modifiers)[0]
   }
+
+  return event
+}
+
+function destroy (store, el, binding) {
+  const event = getEvent(binding)
 
   const commitState = (event) => {
     store.commit('mutateState', {
