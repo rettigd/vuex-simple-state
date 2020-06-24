@@ -1,5 +1,5 @@
 /*!
- * vuex-simple-state v0.0.28
+ * vuex-simple-state v0.0.29
  * (c) Darryl Rettig
  * Released under the MIT License.
  */
@@ -1966,7 +1966,7 @@ var vuexState = {
         el.value = lodash_get(vnode.context.$store.state, target);
       },
       mounted: function mounted(el, binding, vnode) {
-        var target = binding.arg;
+        var target = binding.value;
         var store = vnode.dirs[0].instance.$store;
 
         var commitState = function commitState(event) {
@@ -1985,7 +1985,7 @@ var vuexState = {
         el.dataset.vuex = target;
       },
       updated: function updated(el, binding, vnode) {
-        var target = binding.arg;
+        var target = binding.value;
         var store = vnode.dirs[0].instance.$store;
 
         if (Object.keys(binding.modifiers).length !== 0) {

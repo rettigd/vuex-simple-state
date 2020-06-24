@@ -36,7 +36,7 @@ const vuexState = {
       },
       mounted: function(el, binding, vnode) {
         
-        let target = binding.arg
+        let target = binding.value
         let store = vnode.dirs[0].instance.$store
 
         const commitState = (event) => {
@@ -45,7 +45,6 @@ const vuexState = {
             value: event.target.value
           })
         }
-        
             
         if (Object.keys(binding.modifiers).length !== 0) {
           target = `${target}.${Object.keys(binding.modifiers).join(".")}`
@@ -57,7 +56,7 @@ const vuexState = {
         el.dataset.vuex = target
       },
       updated: function (el, binding, vnode) {
-        let target = binding.arg
+        let target = binding.value
         let store  = vnode.dirs[0].instance.$store
         if (Object.keys(binding.modifiers).length !== 0) {
           target = `${target}.${Object.keys(binding.modifiers).join(".")}`
