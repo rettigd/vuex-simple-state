@@ -1,6 +1,21 @@
 import get from 'lodash.get'
 import set from 'lodash.set'
 
+function setup(store, el, target) {
+
+  const commitState = (event) => {
+    store.commit('mutateState', {
+      attribute: event.target.dataset['vuex'],
+      value: event.target.value
+    })
+  }
+  
+  el.addEventListener('input', commitState)
+  el.value = get(store.state, target)
+  el.dataset.vuex = target
+
+}
+
 const vuexState = {
   install(Vue) {
     Vue.mixin({
@@ -15,48 +30,16 @@ const vuexState = {
     }),
     Vue.directive('state', {
       bind: function(el, binding, vnode) {
-        let target = binding.value
-        var store = vnode.context.$store
-
-        const commitState = (event) => {
-          store.commit('mutateState', {
-            attribute: event.target.dataset['vuex'],
-            value: event.target.value
-          })
-        }
-
-        el.addEventListener('input', commitState)
-
-        el.value = get(store.state, target)
-        el.dataset.vuex = target
+        setup(vnode.context.$store, el, binding.value)
       },
       update: function (el, binding, vnode) {
-        let target = binding.value
-
-        el.value = get(vnode.context.$store.state, target)
+        el.value = get(vnode.context.$store.state, binding.value)
       },
-      mounted: function(el, binding, vnode) {
-        
-        let target = binding.value
-        var store = vnode.dirs[0].instance.$store
-
-        const commitState = (event) => {
-          store.commit('mutateState', {
-            attribute: event.target.dataset['vuex'],
-            value: event.target.value
-          })
-        }
-       
-        el.addEventListener('input', commitState)
-
-        el.value = get(store.state, target)
-        el.dataset.vuex = target
+      mounted: function(el, binding, vnode) {        
+        setup(vnode.dirs[0].instance.$store, el, binding.value)
       },
       updated: function (el, binding, vnode) {
-        let target = binding.value
-        let store  = vnode.dirs[0].instance.$store
-
-        el.value = get(store.state, target)
+        el.value = get(vnode.dirs[0].instance.$store.state, binding.value)
       }
     })
   }
