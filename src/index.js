@@ -37,7 +37,7 @@ const vuexState = {
       mounted: function(el, binding, vnode) {
         
         let target = binding.value
-        let store = vnode.dirs[0].instance.$store
+        var store = vnode.dirs[0].instance.$store
 
         const commitState = (event) => {
           store.commit('mutateState', {
@@ -46,9 +46,9 @@ const vuexState = {
           })
         }
             
-        if (Object.keys(binding.modifiers).length !== 0) {
-          target = `${target}.${Object.keys(binding.modifiers).join(".")}`
-        }
+        // if (Object.keys(binding.modifiers).length !== 0) {
+        //   target = `${target}.${Object.keys(binding.modifiers).join(".")}`
+        // }
 
         el.addEventListener('input', commitState)
 

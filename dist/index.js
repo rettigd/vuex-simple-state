@@ -1,5 +1,5 @@
 /*!
- * vuex-simple-state v0.0.29
+ * vuex-simple-state v0.0.31
  * (c) Darryl Rettig
  * Released under the MIT License.
  */
@@ -1974,11 +1974,10 @@ var vuexState = {
             attribute: event.target.dataset['vuex'],
             value: event.target.value
           });
-        };
+        }; // if (Object.keys(binding.modifiers).length !== 0) {
+        //   target = `${target}.${Object.keys(binding.modifiers).join(".")}`
+        // }
 
-        if (Object.keys(binding.modifiers).length !== 0) {
-          target = "".concat(target, ".").concat(Object.keys(binding.modifiers).join("."));
-        }
 
         el.addEventListener('input', commitState);
         el.value = lodash_get(store.state, target);
