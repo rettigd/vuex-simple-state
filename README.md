@@ -77,3 +77,12 @@ or
 
 
 ```
+
+## Events
+
+State is sync'd on the input event, but you can update any event
+
+```
+<input v-state.blur="'user.email'">             //Updates state on focus loss
+<input v-state.my-custom-event="'user.email'">  // You'll need to manually dispatch custom events
+```
