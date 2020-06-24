@@ -1,19 +1,29 @@
 # Vuex Simple State
+### Works with Vue 2 and Vue 3
 
+## Installation
+```
+npm install vuex-simple-state --save
+```
+
+or
+
+```
+yarn add vuex-simple-state
+```
 
 ## Add the project to your main.js
 ```
 import store from './store'
-....
-import State from 'vuex-state'
+...
+import State from 'vuex-simple-state'
 
 Vue.use(State)
-
 ```
 
-### Add the mutation to your store
+## Add the mutation to your store
 ```
-import { mutateState } from 'vuex-state'
+import { mutateState } from 'vuex-simple-state'
 ...
   state: {
     email: 'me@example.com',
@@ -24,25 +34,46 @@ import { mutateState } from 'vuex-state'
   mutations: {
     mutateState //Add the mutation here
   },
-
 ...
 ```
 
-### Add the directive to your code
-<input v-state:[your state element]="commitState">
+## Add the directive to your code
+`<input v-state="[element name]">`
+
 ```
-<input v-state:email="commitState">
+<input v-state="'email'">
 ```
 
-Thats it!
+## For modules or nested elements
+`<input v-state="'[your state element].[child element]'">`
 
-### For modules or nested elements
-<input v-state:[your state element][child element]="commitState">  
 or  
-<input v-state:[module][your state element]="commitState">  
+
+`<input v-state="'[module].[your state element]'">`
+
 or  
-<input v-state:[module][your state element][child element]="commitState">  
+
+`<input v-state="'[module].[your state element].[child element]'">`
+
+
+## Examples
 
 ```
-<input v-state:user.email="commitState">
+<input v-state="'user.email'">
+<input v-state="'module.email'">
+<input v-state="'module.customer.email'">
+
+
+// Make the store state you are bound to responsive to a data element or computed field
+...
+<input v-state="myDataElement">
+...
+  data() {
+    return {
+      myDataElement: 'employee.email'
+    }
+  }
+...
+
+
 ```
