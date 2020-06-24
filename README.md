@@ -102,7 +102,7 @@ or
 
 ## Events
 
-State is sync'd on the input event, but you can update any event
+State is sync'd on the input event, but you can update on any event
 
 ```
 <input v-state.blur="'user.email'">             //Updates state on focus loss
