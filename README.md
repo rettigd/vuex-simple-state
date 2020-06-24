@@ -1,5 +1,5 @@
 # Vuex Simple State
-### Works with Vue 2 and Vue 3 (Option API, Composition API coming soon)
+### Works with Vue 2 and Vue 3
 
 ## Installation
 ```
@@ -56,7 +56,7 @@ or
 `<input v-state="'[module].[your state element].[child element]'">`
 
 
-## Examples
+## Vue 2 Example
 
 ```
 <input v-state="'user.email'">
@@ -66,17 +66,39 @@ or
 
 // Make the store state you are bound to reactive to a data element or computed field
 ...
-<input v-state="myDataElement">
+<input v-state="element">
 ...
   data() {
     return {
-      myDataElement: 'employee.email'
+      element: 'employee.email'
     }
   }
 ...
 
 
 ```
+
+## Vue 3 Example
+
+```
+<input v-state="'user.email'">
+<input v-state="'module.email'">
+<input v-state="'module.customer.email'">
+
+<input v-state="data.element"> //Reactive element
+...
+  setup() {
+    const data = reactive({
+      element: 'employee.email'
+    })
+    return {
+      data
+    }
+  }
+...
+
+```
+
 
 ## Events
 

@@ -20,6 +20,11 @@ function setup (store, el, binding) {
   el.dataset.vuex = binding.value
 }
 
+function update (store, el, binding) {
+  el.value = get(store.state, binding.value)
+  el.dataset.vuex = binding.value
+}
+
 const vuexState = {
   install (Vue) {
     Vue.directive('state', {
@@ -27,13 +32,13 @@ const vuexState = {
         setup(vnode.context.$store, el, binding)
       },
       update: function (el, binding, vnode) {
-        el.value = get(vnode.context.$store.state, binding.value)
+        update(vnode.context.$store, el, binding)
       },
       mounted: function (el, binding, vnode) {
         setup(vnode.dirs[0].instance.$store, el, binding)
       },
       updated: function (el, binding, vnode) {
-        el.value = get(vnode.dirs[0].instance.$store.state, binding.value)
+        update(vnode.dirs[0].instance.$store, el, binding)
       }
     })
   }

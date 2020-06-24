@@ -1,5 +1,5 @@
 /*!
- * vuex-simple-state v0.1.5
+ * vuex-simple-state v0.1.6
  * (c) Darryl Rettig
  * Released under the MIT License.
  */
@@ -1951,6 +1951,11 @@ function setup(store, el, binding) {
   el.dataset.vuex = binding.value;
 }
 
+function _update(store, el, binding) {
+  el.value = lodash_get(store.state, binding.value);
+  el.dataset.vuex = binding.value;
+}
+
 var vuexState = {
   install: function install(Vue) {
     Vue.directive('state', {
@@ -1958,13 +1963,13 @@ var vuexState = {
         setup(vnode.context.$store, el, binding);
       },
       update: function update(el, binding, vnode) {
-        el.value = lodash_get(vnode.context.$store.state, binding.value);
+        _update(vnode.context.$store, el, binding);
       },
       mounted: function mounted(el, binding, vnode) {
         setup(vnode.dirs[0].instance.$store, el, binding);
       },
       updated: function updated(el, binding, vnode) {
-        el.value = lodash_get(vnode.dirs[0].instance.$store.state, binding.value);
+        _update(vnode.dirs[0].instance.$store, el, binding);
       }
     });
   }
