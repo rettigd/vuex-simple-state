@@ -45,7 +45,7 @@ const vuexState = {
   }
 }
 
-export function  mutateState (state, value) {
+export function mutateState (state, value) {
   set(state, value.attribute, value.value);
 }
 

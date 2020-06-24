@@ -1,5 +1,5 @@
 # Vuex Simple State
-### Works with Vue 2 and Vue 3
+### Works with Vue 2 and Vue 3 (Option API, Composition API coming soon)
 
 ## Installation
 ```
