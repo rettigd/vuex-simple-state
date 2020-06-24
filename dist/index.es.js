@@ -1932,10 +1932,7 @@ function setup(store, el, binding) {
   var event = getEvent(binding);
 
   var commitState = function commitState(event) {
-    store.commit('mutateState', {
-      attribute: event.target.dataset.vuex,
-      value: event.target.value
-    });
+    return commit(store);
   };
 
   el.addEventListener(event, commitState);
@@ -1946,6 +1943,13 @@ function setup(store, el, binding) {
 function _update(store, el, binding) {
   el.value = lodash_get(store.state, binding.value);
   el.dataset.vuex = binding.value;
+}
+
+function commit(store) {
+  store.commit('mutateState', {
+    attribute: event.target.dataset.vuex,
+    value: event.target.value
+  });
 }
 
 function getEvent(binding) {
@@ -1962,10 +1966,7 @@ function destroy(store, el, binding) {
   var event = getEvent(binding);
 
   var commitState = function commitState(event) {
-    store.commit('mutateState', {
-      attribute: event.target.dataset.vuex,
-      value: event.target.value
-    });
+    return commit(store);
   };
 
   el.removeEventListener(event, commitState);
@@ -1990,6 +1991,9 @@ var vuexState = {
         _update(vnode.dirs[0].instance.$store, el, binding);
       },
       beforeUnmount: function beforeUnmount(el, binding, vnode) {
+        destroy(vnode.dirs[0].instance.$store, el, binding);
+      },
+      unmounted: function unmounted(el, binding, vnode) {
         destroy(vnode.dirs[0].instance.$store, el, binding);
       }
     });

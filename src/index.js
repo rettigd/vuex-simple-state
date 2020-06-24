@@ -4,12 +4,7 @@ import set from 'lodash.set'
 function setup (store, el, binding) {
   const event = getEvent(binding)
 
-  const commitState = (event) => {
-    store.commit('mutateState', {
-      attribute: event.target.dataset.vuex,
-      value: event.target.value
-    })
-  }
+  const commitState = event => commit(store)
 
   el.addEventListener(event, commitState)
   el.value = get(store.state, binding.value)
@@ -19,6 +14,13 @@ function setup (store, el, binding) {
 function update (store, el, binding) {
   el.value = get(store.state, binding.value)
   el.dataset.vuex = binding.value
+}
+
+function commit (store) {
+  store.commit('mutateState', {
+    attribute: event.target.dataset.vuex,
+    value: event.target.value
+  })
 }
 
 function getEvent (binding) {
@@ -33,13 +35,7 @@ function getEvent (binding) {
 
 function destroy (store, el, binding) {
   const event = getEvent(binding)
-
-  const commitState = (event) => {
-    store.commit('mutateState', {
-      attribute: event.target.dataset.vuex,
-      value: event.target.value
-    })
-  }
+  const commitState = event => commit(store)
 
   el.removeEventListener(event, commitState)
 }
@@ -63,6 +59,9 @@ const vuexState = {
         update(vnode.dirs[0].instance.$store, el, binding)
       },
       beforeUnmount: function (el, binding, vnode) {
+        destroy(vnode.dirs[0].instance.$store, el, binding)
+      },
+      unmounted: function (el, binding, vnode) {
         destroy(vnode.dirs[0].instance.$store, el, binding)
       }
     })
