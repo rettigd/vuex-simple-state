@@ -18,10 +18,6 @@ const vuexState = {
         let commitState = binding.value
         let target = binding.arg
 
-        if (Object.keys(binding.modifiers).length !== 0) {
-          target = `${target}.${Object.keys(binding.modifiers).join(".")}`
-        }
-
         el.addEventListener('input', commitState)
 
         el.value = get(vnode.context.$store.state, target)
@@ -29,9 +25,7 @@ const vuexState = {
       },
       update: function (el, binding, vnode) {
         let target = binding.arg
-        if (Object.keys(binding.modifiers).length !== 0) {
-          target = `${target}.${Object.keys(binding.modifiers).join(".")}`
-        }
+
         el.value = get(vnode.context.$store.state, target)
       },
       mounted: function(el, binding, vnode) {
@@ -45,11 +39,7 @@ const vuexState = {
             value: event.target.value
           })
         }
-            
-        // if (Object.keys(binding.modifiers).length !== 0) {
-        //   target = `${target}.${Object.keys(binding.modifiers).join(".")}`
-        // }
-
+       
         el.addEventListener('input', commitState)
 
         el.value = get(store.state, target)
@@ -58,9 +48,7 @@ const vuexState = {
       updated: function (el, binding, vnode) {
         let target = binding.value
         let store  = vnode.dirs[0].instance.$store
-        if (Object.keys(binding.modifiers).length !== 0) {
-          target = `${target}.${Object.keys(binding.modifiers).join(".")}`
-        }
+
         el.value = get(store.state, target)
       }
     })
