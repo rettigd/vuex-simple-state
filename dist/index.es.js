@@ -1,5 +1,5 @@
 /*!
- * vuex-simple-state v0.1.6
+ * vuex-simple-state v0.1.7
  * (c) Darryl Rettig
  * Released under the MIT License.
  */
@@ -1952,6 +1952,23 @@ function _update(store, el, binding) {
   el.dataset.vuex = binding.value;
 }
 
+function destroy(store, el, binding) {
+  var event = 'input';
+
+  if (Object.keys(binding.modifiers).length) {
+    event = Object.keys(binding.modifiers)[0];
+  }
+
+  var commitState = function commitState(event) {
+    store.commit('mutateState', {
+      attribute: event.target.dataset.vuex,
+      value: event.target.value
+    });
+  };
+
+  el.removeEventListener(event, commitState);
+}
+
 var vuexState = {
   install: function install(Vue) {
     Vue.directive('state', {
@@ -1961,11 +1978,17 @@ var vuexState = {
       update: function update(el, binding, vnode) {
         _update(vnode.context.$store, el, binding);
       },
+      unbind: function unbind(el, binding, vnode) {
+        destroy(vnode.context.$store, el, binding);
+      },
       mounted: function mounted(el, binding, vnode) {
         setup(vnode.dirs[0].instance.$store, el, binding);
       },
       updated: function updated(el, binding, vnode) {
         _update(vnode.dirs[0].instance.$store, el, binding);
+      },
+      beforeUnmount: function beforeUnmount(el, binding, vnode) {
+        destroy(vnode.dirs[0].instance.$store, el, binding);
       }
     });
   }

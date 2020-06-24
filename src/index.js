@@ -25,6 +25,23 @@ function update (store, el, binding) {
   el.dataset.vuex = binding.value
 }
 
+function destroy (store, el, binding) {
+  let event = 'input'
+
+  if (Object.keys(binding.modifiers).length) {
+    event = Object.keys(binding.modifiers)[0]
+  }
+
+  const commitState = (event) => {
+    store.commit('mutateState', {
+      attribute: event.target.dataset.vuex,
+      value: event.target.value
+    })
+  }
+
+  el.removeEventListener(event, commitState)
+}
+
 const vuexState = {
   install (Vue) {
     Vue.directive('state', {
@@ -34,11 +51,17 @@ const vuexState = {
       update: function (el, binding, vnode) {
         update(vnode.context.$store, el, binding)
       },
+      unbind: function (el, binding, vnode) {
+        destroy(vnode.context.$store, el, binding)
+      },
       mounted: function (el, binding, vnode) {
         setup(vnode.dirs[0].instance.$store, el, binding)
       },
       updated: function (el, binding, vnode) {
         update(vnode.dirs[0].instance.$store, el, binding)
+      },
+      beforeUnmount: function (el, binding, vnode) {
+        destroy(vnode.dirs[0].instance.$store, el, binding)
       }
     })
   }
