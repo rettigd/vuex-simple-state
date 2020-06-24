@@ -1,5 +1,5 @@
 /*!
- * vuex-simple-state v0.0.3
+ * vuex-simple-state v0.0.28
  * (c) Darryl Rettig
  * Released under the MIT License.
  */
@@ -1964,13 +1964,42 @@ var vuexState = {
         }
 
         el.value = lodash_get(vnode.context.$store.state, target);
+      },
+      mounted: function mounted(el, binding, vnode) {
+        var target = binding.arg;
+        var store = vnode.dirs[0].instance.$store;
+
+        var commitState = function commitState(event) {
+          store.commit('mutateState', {
+            attribute: event.target.dataset['vuex'],
+            value: event.target.value
+          });
+        };
+
+        if (Object.keys(binding.modifiers).length !== 0) {
+          target = "".concat(target, ".").concat(Object.keys(binding.modifiers).join("."));
+        }
+
+        el.addEventListener('input', commitState);
+        el.value = lodash_get(store.state, target);
+        el.dataset.vuex = target;
+      },
+      updated: function updated(el, binding, vnode) {
+        var target = binding.arg;
+        var store = vnode.dirs[0].instance.$store;
+
+        if (Object.keys(binding.modifiers).length !== 0) {
+          target = "".concat(target, ".").concat(Object.keys(binding.modifiers).join("."));
+        }
+
+        el.value = lodash_get(store.state, target);
       }
     });
   }
 };
-var mutateState = function mutateState(state, value) {
+function mutateState(state, value) {
   lodash_set(state, value.attribute, value.value);
-};
+}
 
 if (typeof window !== 'undefined' && window.Vue) {
   window.Vue.use(vuexState);
