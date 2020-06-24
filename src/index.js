@@ -18,16 +18,6 @@ function setup(store, el, target) {
 
 const vuexState = {
   install(Vue) {
-    Vue.mixin({
-      methods: {
-        commitState(event) {
-          this.$store.commit('mutateState', {
-            attribute: event.target.dataset['vuex'],
-            value: event.target.value
-          })
-        }
-      }
-    }),
     Vue.directive('state', {
       bind: function(el, binding, vnode) {
         setup(vnode.context.$store, el, binding.value)
