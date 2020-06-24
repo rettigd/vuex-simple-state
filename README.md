@@ -64,7 +64,7 @@ or
 <input v-state="'module.customer.email'">
 
 
-// Make the store state you are bound to responsive to a data element or computed field
+// Make the store state you are bound to reactive to a data element or computed field
 ...
 <input v-state="myDataElement">
 ...
