@@ -1,5 +1,5 @@
 /*!
- * vuex-simple-state v0.0.31
+ * vuex-simple-state v0.1.0
  * (c) Darryl Rettig
  * Released under the MIT License.
  */
@@ -1943,22 +1943,12 @@ var vuexState = {
       bind: function bind(el, binding, vnode) {
         var commitState = binding.value;
         var target = binding.arg;
-
-        if (Object.keys(binding.modifiers).length !== 0) {
-          target = "".concat(target, ".").concat(Object.keys(binding.modifiers).join("."));
-        }
-
         el.addEventListener('input', commitState);
         el.value = lodash_get(vnode.context.$store.state, target);
         el.dataset.vuex = target;
       },
       update: function update(el, binding, vnode) {
         var target = binding.arg;
-
-        if (Object.keys(binding.modifiers).length !== 0) {
-          target = "".concat(target, ".").concat(Object.keys(binding.modifiers).join("."));
-        }
-
         el.value = lodash_get(vnode.context.$store.state, target);
       },
       mounted: function mounted(el, binding, vnode) {
@@ -1970,10 +1960,7 @@ var vuexState = {
             attribute: event.target.dataset['vuex'],
             value: event.target.value
           });
-        }; // if (Object.keys(binding.modifiers).length !== 0) {
-        //   target = `${target}.${Object.keys(binding.modifiers).join(".")}`
-        // }
-
+        };
 
         el.addEventListener('input', commitState);
         el.value = lodash_get(store.state, target);
@@ -1982,11 +1969,6 @@ var vuexState = {
       updated: function updated(el, binding, vnode) {
         var target = binding.value;
         var store = vnode.dirs[0].instance.$store;
-
-        if (Object.keys(binding.modifiers).length !== 0) {
-          target = "".concat(target, ".").concat(Object.keys(binding.modifiers).join("."));
-        }
-
         el.value = lodash_get(store.state, target);
       }
     });
