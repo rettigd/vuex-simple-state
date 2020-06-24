@@ -1,5 +1,5 @@
 /*!
- * vuex-simple-state v0.1.0
+ * vuex-simple-state v0.1.3
  * (c) Darryl Rettig
  * Released under the MIT License.
  */
@@ -1941,14 +1941,22 @@ var vuexState = {
       }
     }), Vue.directive('state', {
       bind: function bind(el, binding, vnode) {
-        var commitState = binding.value;
-        var target = binding.arg;
+        var target = binding.value;
+        var store = vnode.context.$store;
+
+        var commitState = function commitState(event) {
+          store.commit('mutateState', {
+            attribute: event.target.dataset['vuex'],
+            value: event.target.value
+          });
+        };
+
         el.addEventListener('input', commitState);
-        el.value = lodash_get(vnode.context.$store.state, target);
+        el.value = lodash_get(store.state, target);
         el.dataset.vuex = target;
       },
       update: function update(el, binding, vnode) {
-        var target = binding.arg;
+        var target = binding.value;
         el.value = lodash_get(vnode.context.$store.state, target);
       },
       mounted: function mounted(el, binding, vnode) {

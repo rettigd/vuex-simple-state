@@ -15,16 +15,23 @@ const vuexState = {
     }),
     Vue.directive('state', {
       bind: function(el, binding, vnode) {
-        let commitState = binding.value
-        let target = binding.arg
+        let target = binding.value
+        var store = vnode.context.$store
+
+        const commitState = (event) => {
+          store.commit('mutateState', {
+            attribute: event.target.dataset['vuex'],
+            value: event.target.value
+          })
+        }
 
         el.addEventListener('input', commitState)
 
-        el.value = get(vnode.context.$store.state, target)
+        el.value = get(store.state, target)
         el.dataset.vuex = target
       },
       update: function (el, binding, vnode) {
-        let target = binding.arg
+        let target = binding.value
 
         el.value = get(vnode.context.$store.state, target)
       },
