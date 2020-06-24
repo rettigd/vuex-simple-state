@@ -1,11 +1,12 @@
 {
   "private": false,
   "name": "vuex-simple-state",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Vue plugin that makes setting and getting state simple",
   "main": "./dist/index.es.js",
   "scripts": {
-    "build": "bili --bundle-node-modules --format esm --format esm-min --format cjs-min --format cjs"
+    "build": "bili --bundle-node-modules --format esm --format esm-min --format cjs-min --format cjs",
+    "lint": "eslint src/index.js"
   },
   "files": [
     "dist/*"
@@ -29,6 +30,13 @@
   "devDependencies": {
     "@vue/compiler-sfc": "^3.0.0-beta.15",
     "bili": "^5.0.2",
+    "eslint": "^7.3.1",
+    "eslint-config-standard": "^14.1.1",
+    "eslint-plugin-import": "^2.21.2",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1",
+    "eslint-plugin-vue": "^6.2.2",
     "lodash.get": "^4.4.2",
     "lodash.set": "^4.3.2",
     "rollup-plugin-vue": "^6.0.0-beta.6"

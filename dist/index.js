@@ -1,5 +1,5 @@
 /*!
- * vuex-simple-state v0.1.3
+ * vuex-simple-state v0.1.4
  * (c) Darryl Rettig
  * Released under the MIT License.
  */
@@ -1935,7 +1935,7 @@ var lodash_set = set;
 function setup(store, el, target) {
   var commitState = function commitState(event) {
     store.commit('mutateState', {
-      attribute: event.target.dataset['vuex'],
+      attribute: event.target.dataset.vuex,
       value: event.target.value
     });
   };
