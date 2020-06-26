@@ -1,5 +1,5 @@
 /*!
- * vuex-simple-state v0.1.7
+ * vuex-simple-state v0.1.8
  * (c) Darryl Rettig
  * Released under the MIT License.
  */
@@ -1989,9 +1989,6 @@ var vuexState = {
       },
       updated: function updated(el, binding, vnode) {
         _update(vnode.dirs[0].instance.$store, el, binding);
-      },
-      beforeUnmount: function beforeUnmount(el, binding, vnode) {
-        destroy(vnode.dirs[0].instance.$store, el, binding);
       },
       unmounted: function unmounted(el, binding, vnode) {
         destroy(vnode.dirs[0].instance.$store, el, binding);
