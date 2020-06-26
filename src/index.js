@@ -58,9 +58,6 @@ const vuexState = {
       updated: function (el, binding, vnode) {
         update(vnode.dirs[0].instance.$store, el, binding)
       },
-      beforeUnmount: function (el, binding, vnode) {
-        destroy(vnode.dirs[0].instance.$store, el, binding)
-      },
       unmounted: function (el, binding, vnode) {
         destroy(vnode.dirs[0].instance.$store, el, binding)
       }
