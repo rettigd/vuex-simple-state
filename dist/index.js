@@ -1,5 +1,5 @@
 /*!
- * vuex-simple-state v0.1.8
+ * vuex-simple-state v0.1.9
  * (c) Darryl Rettig
  * Released under the MIT License.
  */
